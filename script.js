@@ -45,7 +45,7 @@ function bumpStat(id) {
 
 
 function updateStats() {
-  const total    = movies.length;
+  const total = movies.filter(m => m.status !== 'deleted').length;
   const watched  = movies.filter(m => m.status === 'watched').length;
   const watching = movies.filter(m => m.status === 'watching').length;
   const plan     = movies.filter(m => m.status === 'plan').length;
@@ -73,7 +73,7 @@ function updateStats() {
 }
 
 
-const allStars   = document.querySelectorAll('.star-btn');
+const allStars = document.querySelectorAll('#star-group .star-btn');
 const starGroup  = $('star-group');
 const lockMsg    = $('rating-lock-msg');
 
@@ -212,12 +212,19 @@ function deleteMovie(id) {
   const target = movies.find(m => m.id === id);
   if (!target) return;
 
-  movies = movies.filter(m => m.id !== id);
-  saveMovies();
+  if (target.status === 'deleted') {
+    // If it's already in history, permanently delete it
+    movies = movies.filter(m => m.id !== id);
+    showToast(`"${target.title}" permanently deleted.`, 'error');
+  } else {
+    // Soft delete: move to history
+    target.status = 'deleted';
+    showToast(`"${target.title}" moved to History.`, 'error');
+  }
 
+  saveMovies();
   renderTable();
   updateStats();
-  showToast(`"${target.title}" removed.`, 'error');
 }
 window.deleteMovie = deleteMovie;
 
@@ -234,13 +241,16 @@ const STATUS_MAP = {
   watching: ['badge-watching', '▶ Watching'],
   plan:     ['badge-plan',     '◷ Plan to Watch'],
   dropped:  ['badge-dropped',  '✕ Dropped'],
+  deleted:  ['badge-deleted',  '🗑 Deleted'] 
 };
 
 
 function getDisplayData() {
   return movies
     .filter(m => {
-      const matchFilter = currentFilter === 'all' || m.status === currentFilter;
+      const matchFilter = currentFilter === 'all' 
+      ? m.status !== 'deleted' 
+      : m.status === currentFilter;
       const q = currentSearch.toLowerCase();
       const matchSearch = !q
         || m.title.toLowerCase().includes(q)
@@ -401,7 +411,6 @@ window.addEventListener('click', (e) => {
 
 // Event Delegation - listens for clicks anywhere inside the table body
 $('movie-tbody').addEventListener('click', (e) => {
-  // Prevent modal from opening if the delete button was clicked
   if (e.target.closest('.btn-delete')) return;
 
   const row = e.target.closest('tr');
@@ -409,11 +418,120 @@ $('movie-tbody').addEventListener('click', (e) => {
 
   const movieId = Number(row.dataset.id); 
   const movie = movies.find(m => m.id === movieId); 
+  if (!movie) return;
 
-  if (movie) {
-    // Ipapasa na natin yung BUONG movie object sa function imbes na title at notes lang!
-    openNotesModal(movie);
+  // Kung mismong STATUS BADGE ang kinlick, buksan ang Edit Status Modal
+  if (e.target.closest('.badge')) {
+    openUpdateModal(movie);
+    return; // Pigilan ang pagbukas ng Notes Modal
   }
+
+  // Kung sa ibang part ng row kinlick, buksan ang Notes Modal
+  openNotesModal(movie);
+});
+
+// ==========================================
+// ADDED: UPDATE STATUS MODAL LOGIC
+// ==========================================
+const updateModal = document.getElementById('updateModal');
+const closeUpdateBtn = document.querySelector('.close-update-modal');
+const updTitle = document.getElementById('updateMovieTitle');
+const updId = document.getElementById('updateMovieId');
+const updStatus = document.getElementById('updateStatus');
+const updStarGroup = document.getElementById('update-star-group');
+const updLockMsg = document.getElementById('update-rating-lock');
+const updRatingInput = document.getElementById('updateRating');
+const updStars = document.querySelectorAll('.upd-star-btn');
+const btnSaveUpdate = document.getElementById('btnSaveUpdate');
+
+let currentUpdRating = 0;
+
+function refreshUpdStars() {
+  updStars.forEach(s => {
+    s.classList.toggle('active', +s.dataset.val <= currentUpdRating);
+  });
+}
+
+function setUpdRatingLock(isLocked) {
+  if (isLocked) {
+    updStarGroup.classList.add('disabled');
+    updLockMsg.classList.add('show');
+    currentUpdRating = 0;
+    refreshUpdStars();
+    updRatingInput.value = 0;
+  } else {
+    updStarGroup.classList.remove('disabled');
+    updLockMsg.classList.remove('show');
+  }
+}
+
+// Hover and click logic for the Update Modal Stars
+updStars.forEach(btn => {
+  btn.addEventListener('mouseenter', () => {
+    if (updStarGroup.classList.contains('disabled')) return;
+    const val = +btn.dataset.val;
+    updStars.forEach(s => s.classList.toggle('active', +s.dataset.val <= val));
+  });
+  btn.addEventListener('mouseleave', refreshUpdStars);
+  
+  btn.addEventListener('click', () => {
+    if (updStarGroup.classList.contains('disabled')) return;
+    currentUpdRating = +btn.dataset.val;
+    updRatingInput.value = currentUpdRating;
+    refreshUpdStars();
+  });
+});
+
+// Makinig sa pagpalit ng status sa dropdown
+updStatus.addEventListener('change', function() {
+  setUpdRatingLock(this.value !== 'watched');
+});
+
+// Function para buksan ang Update Modal
+function openUpdateModal(movie) {
+  updTitle.textContent = movie.title;
+  updId.value = movie.id;
+  updStatus.value = movie.status;
+  
+  // Kung 'watched' na siya, buksan ang stars at ilagay ang current rating
+  if (movie.status === 'watched') {
+    setUpdRatingLock(false);
+    currentUpdRating = movie.rating || 0;
+    updRatingInput.value = currentUpdRating;
+    refreshUpdStars();
+  } else {
+    setUpdRatingLock(true);
+  }
+  
+  updateModal.classList.add('active');
+}
+
+// Close events
+closeUpdateBtn.addEventListener('click', () => updateModal.classList.remove('active'));
+window.addEventListener('click', (e) => {
+  if (e.target === updateModal) updateModal.classList.remove('active');
+});
+
+// Save button logic
+btnSaveUpdate.addEventListener('click', () => {
+  const movieId = Number(updId.value);
+  const newStatus = updStatus.value;
+  const newRating = Number(updRatingInput.value);
+
+  // Hanapin yung movie at i-update yung data
+  const movieIndex = movies.findIndex(m => m.id === movieId);
+  if (movieIndex > -1) {
+    movies[movieIndex].status = newStatus;
+    // Kung nilipat sa 'watched', kunin ang rating. Kung hindi, i-zero ang rating.
+    movies[movieIndex].rating = newStatus === 'watched' ? newRating : 0;
+    
+    saveMovies();
+    renderTable();
+    updateStats();
+    showToast(`"${movies[movieIndex].title}" status updated!`);
+  }
+  
+  updateModal.classList.remove('active');
 });
 
 /* ── INITIALISE ─────────────────────────────────────────────── */

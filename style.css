@@ -683,6 +683,11 @@ td {
 .badge-watching { background: rgba(255,200,50,0.1);  color: #ffc832;           border: 1px solid rgba(255,200,50,0.25); }
 .badge-plan     { background: rgba(100,100,100,0.15);color: var(--text-muted); border: 1px solid var(--border); }
 .badge-dropped  { background: rgba(255,68,68,0.1);   color: var(--red);        border: 1px solid rgba(255,68,68,0.25); }
+.badge-deleted {
+  background: rgba(239, 68, 68, 0.1); /* Soft red background */
+  color: #ef4444; /* Red text */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
 
 /* ── GENRE PILL ───────────────────────────────────────────── */
 .genre-pill {
@@ -1135,3 +1140,13 @@ footer a:hover {
   color: var(--text-primary);
 }
 
+td .badge {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+td .badge:hover {
+  transform: scale(1.08);
+  filter: brightness(1.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}

@@ -215,6 +215,7 @@
           <button class="filter-tab" data-filter="watching">Watching</button>
           <button class="filter-tab" data-filter="plan">Plan to Watch</button>
           <button class="filter-tab" data-filter="dropped">Dropped</button>
+          <button class="filter-tab" data-filter="deleted">History</button>
         </div>
 
         <div class="table-scroll">
@@ -281,7 +282,44 @@
     </div>
   </div>
 
-  
+  <div id="updateModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 350px;">
+      <span class="close-update-modal close-modal">&times;</span>
+      <h3 style="margin-top: 0; color: var(--green); margin-bottom: 5px;">Update Status</h3>
+      <p id="updateMovieTitle" style="margin-bottom: 20px; color: var(--text-secondary); font-size: 0.9rem;">Movie Title</p>
+
+      <input type="hidden" id="updateMovieId" />
+
+      <div class="form-group">
+        <label class="form-label" for="updateStatus">New Status</label>
+        <select class="form-control" id="updateStatus">
+          <option value="watched">Watched</option>
+          <option value="watching">Watching</option>
+          <option value="plan">Plan to Watch</option>
+          <option value="dropped">Dropped</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Rating</label>
+        <div class="star-wrapper">
+          <div class="star-group disabled" id="update-star-group">
+            <button type="button" class="upd-star-btn star-btn" data-val="1">★</button>
+            <button type="button" class="upd-star-btn star-btn" data-val="2">★</button>
+            <button type="button" class="upd-star-btn star-btn" data-val="3">★</button>
+            <button type="button" class="upd-star-btn star-btn" data-val="4">★</button>
+            <button type="button" class="upd-star-btn star-btn" data-val="5">★</button>
+          </div>
+          <input type="hidden" id="updateRating" value="0" />
+          <span class="rating-lock-msg show" id="update-rating-lock">Select "Watched" to rate.</span>
+        </div>
+      </div>
+
+      <button id="btnSaveUpdate" class="btn-primary" style="width: 100%; margin-top: 10px;">
+        Save Changes
+      </button>
+    </div>
+  </div>
 
   <div class="toast-container" id="toast-container"></div>
   <script src="script.js"></script>
