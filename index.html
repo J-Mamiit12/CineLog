@@ -8,20 +8,6 @@
 </head>
 <body>
 
-  <div id="notesModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h3 id="modalMovieTitle">Movie Title</h3>
-    <div class="modal-body">
-      <p id="modalMovieNotes">Dito lalabas yung notes...</p>
-    </div>
-  </div>
-</div>
-
-  <!-- ══════════════════════════════════════════════════════
-       NAVBAR
-       Sticky top bar with brand logo and page navigation
-       ══════════════════════════════════════════════════════ -->
   <nav class="navbar">
     <a class="nav-brand" href="index.html">
       <span class="logo-text">Cine<span>LOG</span></span>
@@ -33,10 +19,6 @@
     </ul>
   </nav>
 
-  <!-- ══════════════════════════════════════════════════════
-       HERO
-       Large display heading with green glow background
-       ══════════════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-eyebrow">🎞 Your Personal Cinema</div>
     <h1 class="hero-title">
@@ -48,13 +30,8 @@
     </p>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════
-       STATS BAR
-       Live counters — updated by script.js on every add/delete
-       ══════════════════════════════════════════════════════ -->
   <div class="stats-bar">
     <div class="stat-item">
-      <!-- id="stat-total" is targeted by updateStats() in script.js -->
       <span class="stat-number" id="stat-total">0</span>
       <span class="stat-label">Total</span>
     </div>
@@ -76,19 +53,11 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════
-       MAIN CONTENT — Two-column layout
-       Left: Add Movie form | Right: Watchlist table
-       ══════════════════════════════════════════════════════ -->
   <main class="main-container">
     <div class="two-col">
 
-      <!-- ────────────────────────────────────────────────
-           ADD MOVIE FORM (left column)
-           ──────────────────────────────────────────────── -->
       <div class="card">
 
-        <!-- Card header -->
         <div class="card-header">
           <span class="card-header-icon">▸</span>
           <div>
@@ -97,11 +66,9 @@
           </div>
         </div>
 
-        <!-- Form body -->
         <div class="card-body">
           <form id="movie-form" novalidate>
 
-            <!-- Movie Title (required) -->
             <div class="form-group">
               <label class="form-label" for="movieTitle">
                 Movie Title <span class="req">*</span>
@@ -115,7 +82,6 @@
               <div class="error-msg" id="err-title">⚠ Title is required.</div>
             </div>
 
-            <!-- Year + Duration (side by side) -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="releaseYear">
@@ -143,7 +109,6 @@
               </div>
             </div>
 
-            <!-- Director (optional) -->
             <div class="form-group">
               <label class="form-label" for="director">Director</label>
               <input
@@ -154,7 +119,6 @@
               <div class="error-msg" id="err-director">⚠ No numbers in name.</div>
             </div>
 
-            <!-- Genre + Status (side by side) -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="genre">
@@ -184,7 +148,6 @@
                 <label class="form-label" for="status">
                   Status <span class="req">*</span>
                 </label>
-                <!-- Changing this triggers the rating lock/unlock in script.js -->
                 <select class="form-control" id="status">
                   <option value="">Select</option>
                   <option value="watched">Watched</option>
@@ -196,10 +159,6 @@
               </div>
             </div>
 
-            <!-- Star Rating
-                 Disabled unless status = "watched" (controlled by script.js)
-                 id="star-group" is toggled with .disabled class
-                 id="rating"     is a hidden input holding the numeric value -->
             <div class="form-group">
               <label class="form-label">Your Rating</label>
               <div class="star-wrapper">
@@ -210,16 +169,13 @@
                   <button type="button" class="star-btn" data-val="4" title="4 stars">★</button>
                   <button type="button" class="star-btn" data-val="5" title="5 stars">★</button>
                 </div>
-                <!-- Hidden input stores the numeric rating value for JS to read -->
                 <input type="hidden" id="rating" value="0" />
-                <!-- Lock message — shown when status is not "watched" -->
                 <span class="rating-lock-msg show" id="rating-lock-msg">
                   Select "Watched" to rate this movie.
                 </span>
               </div>
             </div>
 
-            <!-- Notes / Review (optional) -->
             <div class="form-group">
               <label class="form-label" for="notes">Notes / Review</label>
               <textarea
@@ -231,22 +187,13 @@
               <div class="error-msg" id="err-notes">⚠ Max 300 characters.</div>
             </div>
 
-            <!-- Submit button -->
             <button type="submit" class="btn-primary">
               Add to Watchlist +
             </button>
 
           </form>
-        </div><!-- /card-body -->
-      </div><!-- /card -->
+        </div></div><div class="table-panel">
 
-
-      <!-- ────────────────────────────────────────────────
-           WATCHLIST TABLE (right column)
-           ──────────────────────────────────────────────── -->
-      <div class="table-panel">
-
-        <!-- Panel header with title + search -->
         <div class="table-panel-header">
           <div>
             <h2>My Watchlist</h2>
@@ -254,7 +201,6 @@
           </div>
           <div class="search-wrap">
             <span class="search-icon">🔍</span>
-            <!-- Triggers real-time search via script.js -->
             <input
               class="search-input"
               id="searchInput"
@@ -263,7 +209,6 @@
           </div>
         </div>
 
-        <!-- Filter tabs — clicking changes currentFilter in script.js -->
         <div class="filter-tabs">
           <button class="filter-tab active" data-filter="all">All</button>
           <button class="filter-tab" data-filter="watched">Watched</button>
@@ -272,41 +217,33 @@
           <button class="filter-tab" data-filter="dropped">Dropped</button>
         </div>
 
-        <!-- Scrollable table -->
         <div class="table-scroll">
           <table id="movie-table">
             <thead>
-              <tr onclick="openNotesModal('${movie.title}', '${movie.notes}')">
+              <tr>
                 <th>#</th>
-                <!-- data-col attributes enable column sorting in script.js -->
                 <th data-col="title">Title ↕</th>
                 <th data-col="genre">Genre</th>
                 <th data-col="year">Year ↕</th>
                 <th data-col="status">Status ↕</th>
                 <th data-col="rating">Rating ↕</th>
-                <!-- Delete column — no sorting needed -->
                 <th>Del</th>
               </tr>
             </thead>
-            <!-- Rows are injected here by renderTable() in script.js -->
             <tbody id="movie-tbody"></tbody>
           </table>
 
-          <!-- Shown when there are no rows to display -->
           <div class="empty-state" id="empty-state">
             <span class="empty-icon">🎬</span>
             <p>No movies yet. Add your first one!</p>
           </div>
-        </div><!-- /table-scroll -->
+        </div>
 
-      </div><!-- /table-panel -->
+      </div>
 
-    </div><!-- /two-col -->
+    </div>
   </main>
 
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-       ══════════════════════════════════════════════════════ -->
   <footer>
     <p>
       CineLog &mdash; ITEL 203 Group Performance Task #1 &bull;
@@ -315,10 +252,38 @@
     </p>
   </footer>
 
-  <!-- Toast notification container (populated by script.js) -->
-  <div class="toast-container" id="toast-container"></div>
+<div id="notesModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      
+      <div class="modal-header">
+        <h3 id="modalMovieTitle">Movie Title</h3>
+        <span id="modalMovieStatus" class="badge">Status</span>
+      </div>
 
-  <!-- Main application script -->
+      <div class="modal-meta">
+        <span id="modalMovieYear">2023</span> &bull; 
+        <span id="modalMovieDuration">120m</span> &bull; 
+        <span class="genre-pill" id="modalMovieGenre">Action</span>
+      </div>
+
+      <div class="modal-extra-info">
+        <div><strong>Director:</strong> <span id="modalMovieDirector">N/A</span></div>
+        <div style="margin-top: 5px;"><strong>Rating:</strong> <span id="modalMovieRating">N/A</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="modal-body">
+        <strong style="color: var(--text-primary); font-size: 0.9rem;">My Notes / Review:</strong>
+        <p id="modalMovieNotes" style="margin-top: 5px;">Notes will appear here...</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="toast-container" id="toast-container"></div>
   <script src="script.js"></script>
 
 </body>
