@@ -19,13 +19,11 @@
       }
     }
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════
-       NAVBAR
-       ══════════════════════════════════════════════════════ -->
   <nav class="floating-nav z-[100] flex items-center justify-between">
     <a class="nav-brand no-underline cursor-pointer flex items-center" href="index.html">
       <span class="logo-text">Cine<span>LOG</span></span>
@@ -39,9 +37,6 @@
     </ul>
   </nav>
 
-  <!-- ══════════════════════════════════════════════════════
-       PAGE HERO
-       ══════════════════════════════════════════════════════ -->
   <div class="flex flex-col items-center text-center pt-32 pb-10 px-8 max-w-4xl mx-auto">
     <div class="section-eyebrow">👥 The Team</div>
     <h1 class="section-title">Meet the <span class="accent">Developers</span></h1>
@@ -51,88 +46,103 @@
     </p>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════
-       CONTENT — Developer cards and contribution table
-       ══════════════════════════════════════════════════════ -->
   <div class="max-w-[1140px] mx-auto px-8 pb-16">
 
-    <!-- Auto-fill grid of developer profile cards -->
     <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-5 mb-6">
 
-      <!-- ── Member 1: Justine Janolino ── -->
       <div class="dev-card">
         <div class="dev-avatar">
           <img src="img/jus.jpg" alt="Photo of Justine Janolino" />
         </div>
         <div class="dev-name">Justine Janolino</div>
-        <div class="dev-role">Lead Developer &amp; Project Manager</div>
+        <div class="dev-role">Lead Developer & Project Manager</div>
+        
+        <div class="fav-movie">🎬 Fave Movie: <span>Interstellar</span></div>
+        
         <div class="dev-desc">
-          Responsible for the overall project architecture, JavaScript logic,
-          and DOM manipulation. Led development of the form validation system,
-          dynamic table rendering, localStorage data management, duplicate
-          detection, and the recommendations engine.
+          Responsible for the overall project architecture, JavaScript logic, and DOM manipulation. Led development of the form validation system, dynamic table rendering, localStorage data management, duplicate detection, and the recommendations engine.
         </div>
+        
+        <div class="social-links">
+          <a href="https://www.facebook.com/Tatin.janolino" target="_blank" class="social-btn" title="Visit Facebook">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/>
+            </svg> Facebook
+          </a>
+        </div>
+        
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="tech-badge text-[0.72rem]">JavaScript</span>
-          <span class="tech-badge text-[0.72rem]">DOM Manipulation</span>
-          <span class="tech-badge text-[0.72rem]">Project Lead</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fab fa-js"></i> JavaScript</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-cogs"></i> DOM Manipulation</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-crown"></i> Project Lead</span>
         </div>
       </div>
 
-      <!-- ── Member 2: Westly Rivera ── -->
       <div class="dev-card">
         <div class="dev-avatar">
           <img src="img/west.jpg" alt="Photo of Westly Rivera" />
         </div>
         <div class="dev-name">Westly Rivera</div>
-        <div class="dev-role">UI/UX Designer &amp; Front-end Developer</div>
+        <div class="dev-role">UI/UX Designer & Front-end Developer</div>
+        
+        <div class="fav-movie">🎬 Fave Movie: <span>The Batman </span></div>
+        
         <div class="dev-desc">
-          Designed the visual interface and overall aesthetic of CineLog.
-          Handled all CSS styling including the dark cinematic theme, responsive
-          layout, component design, animations, the lime-green design system,
-          and the Statistics and Recommendations page layouts.
+          Designed the visual interface and overall aesthetic of CineLog. Handled all CSS styling including the dark cinematic theme, responsive layout, component design, animations, TailwindCSS integration, and Chart.js custom styling.
         </div>
+        
+        <div class="social-links">
+          <a href="https://www.facebook.com/profile.php?id=61577681184397" target="_blank" class="social-btn" title="Visit Facebook">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/>
+            </svg> Facebook
+          </a>
+        </div>
+        
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="tech-badge text-[0.72rem]">CSS3</span>
-          <span class="tech-badge text-[0.72rem]">UI Design</span>
-          <span class="tech-badge text-[0.72rem]">TailwindCSS</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fab fa-css3-alt"></i> CSS3</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-pencil-ruler"></i> UI Design</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-mobile-alt"></i> Responsive Layout</span>
         </div>
       </div>
 
-      <!-- ── Member 3: Joshua Mamiit ── -->
       <div class="dev-card">
         <div class="dev-avatar">
           <img src="img/josh.jpg" alt="Photo of Joshua Mamiit" />
         </div>
         <div class="dev-name">Joshua Mamiit</div>
-        <div class="dev-role">Content Strategist &amp; Documentation Lead</div>
+        <div class="dev-role">Content Strategist & Documentation Lead</div>
+        
+        <div class="fav-movie">🎬 Fave Movie: <span>PK: Across the US-Verse</span></div>
+        
         <div class="dev-desc">
-          Crafted the HTML structure and page content across all five pages.
-          Led the creation of the Canva presentation and written documentation.
-          Managed Netlify deployment and conducted quality assurance testing
-          across different browsers and devices.
+          Crafted the HTML structure and logical flow across all 5 system pages. Led the creation of the Canva presentation and written documentation. Managed Netlify deployment and conducted quality assurance testing to ensure app stability.
         </div>
+        
+        <div class="social-links">
+          <a href="https://www.facebook.com/JoshuaGarciaUnited" target="_blank" class="social-btn" title="Visit Facebook">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/>
+            </svg> Facebook
+          </a>
+        </div>
+        
         <div class="mt-4 flex flex-wrap gap-1.5">
-          <span class="tech-badge text-[0.72rem]">HTML5</span>
-          <span class="tech-badge text-[0.72rem]">Documentation</span>
-          <span class="tech-badge text-[0.72rem]">GitHub Deploy</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fab fa-html5"></i> HTML5</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-book"></i> Documentation</span>
+          <span class="tech-badge text-[0.72rem]"><i class="fas fa-cloud-upload-alt"></i> GitHub Deploy</span>
         </div>
       </div>
 
-    </div><!-- /dev grid -->
+    </div>
 
-    <div class="h-px bg-stroke my-7"></div>
-
-    <!-- ══════════════════════════════════════════════════
-         CONTRIBUTION SUMMARY TABLE
-         ══════════════════════════════════════════════════ -->
-    <div class="info-card">
-      <h3>🤝 Team Contribution Summary</h3>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm border-collapse">
+    <div class="info-card mt-8">
+      <h3 class="mb-4 text-white font-medium">📌 Team Contribution Summary</h3>
+      <div class="table-scroll">
+        <table class="w-full text-left">
           <thead>
             <tr>
-              <th>Member</th>
+              <th>Member Name</th>
               <th>Role</th>
               <th>Key Contributions</th>
             </tr>
@@ -140,17 +150,17 @@
           <tbody>
             <tr>
               <td class="font-medium text-white">Justine Janolino</td>
-              <td><span class="badge badge-watched">Lead Dev</span></td>
+              <td><span class="badge badge-watched" style="gap: 6px;"><i class="fas fa-crown"></i> Lead Dev</span></td>
               <td class="text-secondary">JS logic, form validation, localStorage, CRUD, duplicate detection, recommendations engine</td>
             </tr>
             <tr>
               <td class="font-medium text-white">Westly Rivera</td>
-              <td><span class="badge badge-watching">UI/UX</span></td>
+              <td><span class="badge badge-watching" style="gap: 6px;"><i class="fas fa-palette"></i> UI/UX</span></td>
               <td class="text-secondary">CSS design system, dark theme, animations, TailwindCSS integration, Chart.js styling</td>
             </tr>
             <tr>
               <td class="font-medium text-white">Joshua Mamiit</td>
-              <td><span class="badge badge-plan">Content</span></td>
+              <td><span class="badge badge-plan" style="gap: 6px;"><i class="fas fa-pen-fancy"></i> Content</span></td>
               <td class="text-secondary">HTML structure across 5 pages, Canva presentation, GitHub deployment, QA</td>
             </tr>
           </tbody>
@@ -160,9 +170,6 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-       ══════════════════════════════════════════════════════ -->
   <footer class="border-t border-stroke py-6 px-8 text-center text-muted text-xs">
     <p>CineLog &mdash; ITEL 203 Group Performance Task #1 &bull;
       <a href="index.html">← Back to Watchlist</a></p>

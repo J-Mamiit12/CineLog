@@ -1439,3 +1439,144 @@ td .badge:hover {
   border-color: var(--green-dim);
   color: var(--text-primary);
 }
+
+
+/* ==========================================================
+   🔥 ALL RECOVERED ANIMATIONS, EFFECTS & GLASSMORPHISM 🔥
+   ========================================================== */
+
+/* ── 1. SOCIAL LINKS & FAV MOVIE ─────────────────────────── */
+.social-links { margin-top: 1.2rem; display: flex; gap: 0.5rem; }
+.social-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.35rem 0.8rem; background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  color: var(--text-secondary); font-size: 0.75rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.social-btn:hover {
+  background: var(--green-glow); border-color: var(--green);
+  color: var(--green); transform: translateY(-2px);
+}
+.fav-movie {
+  font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.8rem;
+  background: var(--bg-elevated); padding: 0.3rem 0.6rem;
+  border-radius: 4px; display: inline-block; position: relative; z-index: 2;
+}
+.fav-movie span { color: var(--text-primary); font-weight: 500; font-style: italic; }
+
+/* ── 2. ENTRANCE ANIMATIONS (STAGGERED) ──────────────────── */
+@keyframes fadeDown {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.page-hero { animation: fadeDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; opacity: 0; }
+.dev-card, .info-card { 
+  animation: fadeUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; opacity: 0; 
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+.dev-card:nth-child(1) { animation-delay: 0.2s; }
+.dev-card:nth-child(2) { animation-delay: 0.4s; }
+.dev-card:nth-child(3) { animation-delay: 0.6s; }
+.info-card:nth-child(1) { animation-delay: 0.1s; }
+.info-card:nth-child(2) { animation-delay: 0.3s; }
+.info-card:nth-child(3) { animation-delay: 0.5s; }
+.info-card:nth-child(4) { animation-delay: 0.7s; }
+
+/* ── 3. CINEMATIC REVEAL & VIP SHINE EFFECT ──────────────── */
+.dev-avatar { overflow: hidden; border: 3px solid transparent; transition: all 0.4s ease; }
+.dev-avatar img { filter: grayscale(100%) contrast(1.1); transition: all 0.5s ease; }
+.dev-card { position: relative; overflow: hidden; }
+.dev-card::before {
+  content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(170, 255, 46, 0.15) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg); transition: all 0.7s ease; z-index: 1; pointer-events: none;
+}
+.dev-card:hover::before { left: 200%; transition: all 0.7s ease-in-out; }
+.dev-name, .dev-role, .dev-desc, .tech-badge { position: relative; z-index: 2; }
+
+/* ── 4. MALUPIT NA ICON SPIN & NEON PULSE ────────────────── */
+.tech-badge i, .badge i { margin-right: 6px; transition: all 0.3s ease; }
+@keyframes tagSpin3D {
+  0% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-15px) rotateY(180deg); }
+  100% { transform: translateY(-12px) rotateY(360deg); }
+}
+@keyframes iconNeonPulse {
+  0% { color: #fff; text-shadow: 0 0 5px #fff; }
+  50% { color: var(--green); text-shadow: 0 0 10px var(--green), 0 0 20px var(--green); }
+  100% { color: var(--green); text-shadow: 0 0 5px var(--green); }
+}
+.dev-card:hover {
+  transform: scale(1.05) translateY(-15px); border-color: var(--green);
+  box-shadow: 0 30px 60px rgba(74, 222, 128, 0.25); z-index: 10;
+  outline: 2px solid rgba(74, 222, 128, 0.3); outline-offset: 5px;
+}
+.dev-card:hover .dev-avatar { border-color: var(--green); box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); }
+.dev-card:hover .dev-avatar img { transform: scale(1.15) rotate(5deg); filter: grayscale(0%) contrast(1); }
+.dev-card:hover .tech-badge {
+  background: var(--bg-elevated); border-color: var(--green); color: var(--green);
+  animation: tagSpin3D 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.dev-card:hover .tech-badge i { animation: iconNeonPulse 1.2s infinite ease-in-out 0.6s; }
+.dev-card:hover .tech-badge:nth-child(1) { animation-delay: 0.1s; }
+.dev-card:hover .tech-badge:nth-child(2) { animation-delay: 0.2s; }
+.dev-card:hover .tech-badge:nth-child(3) { animation-delay: 0.3s; }
+tbody tr:hover .badge i { animation: iconNeonPulse 1.2s infinite ease-in-out; }
+tbody tr:hover .badge { animation: tagSpin3D 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* ── 5. PRO POLISH PACK (Scrollbar, Selection, Glitch) ───── */
+::selection { background: var(--green); color: #0b0b0b; }
+::-moz-selection { background: var(--green); color: #0b0b0b; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-root); border-left: 1px solid var(--border); }
+::-webkit-scrollbar-thumb { background: rgba(170, 255, 46, 0.3); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+.nav-brand:hover .logo-text { text-shadow: 2px 0 rgba(170, 255, 46, 0.8), -2px 0 rgba(255, 68, 68, 0.8); animation: slightGlitch 0.3s linear infinite; }
+@keyframes slightGlitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(2px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
+}
+
+/* ── 6. ABOUT PAGE HOVER EFFECTS & GLASSMORPHISM ─────────── */
+.info-card:hover { transform: translateY(-5px); border-color: rgba(74, 222, 128, 0.3); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); }
+.meta-box { transition: all 0.3s ease; border: 1px solid var(--border); }
+.meta-box:hover {
+  transform: translateY(-8px) scale(1.02); border-color: var(--green);
+  box-shadow: 0 10px 20px rgba(74, 222, 128, 0.15); background: rgba(74, 222, 128, 0.05);
+}
+.meta-box:hover .meta-val { color: var(--green); }
+.info-card:hover .tech-badge {
+  animation: none; transform: translateY(-4px); border-color: var(--green); color: var(--green);
+  box-shadow: 0 4px 10px rgba(74, 222, 128, 0.15); transition: all 0.4s ease;
+}
+.info-card:hover .tech-badge i { animation: none; color: var(--green); }
+.info-card:hover .tech-badge:hover { background: var(--green); color: #0b0b0b; transform: translateY(-6px) scale(1.05); }
+.info-card:hover .tech-badge:hover i { color: #0b0b0b; }
+
+/* System Features Glassmorphism Redesign */
+.feature-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; list-style: none; padding: 0; }
+.feature-list li {
+  background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 1.2rem; border-radius: var(--radius-md);
+  display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--text-secondary); transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.feature-list li i { color: var(--green); font-size: 1.1rem; transition: transform 0.3s ease; }
+.feature-list li:hover {
+  background: rgba(170, 255, 46, 0.05); border-color: var(--green); color: var(--text-primary);
+  transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(170, 255, 46, 0.1);
+}
+.feature-list li:hover i { transform: scale(1.2) rotate(10deg); text-shadow: 0 0 10px var(--green); }
+.feature-list li::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); transition: 0.5s;
+}
+.feature-list li:hover::after { left: 100%; }
