@@ -1124,3 +1124,318 @@ td .badge:hover {
 #customGenreGroup.active {
   display: block;
 }
+
+/* ============================================================
+   NEW STYLES — Statistics, Recommendations, Duplicate Modal
+   Added for Group Performance Task expansion
+   ============================================================ */
+
+/* ── SUMMARY STAT CARDS (statistics.html) ─────────────────── */
+/* Individual top-row stat card */
+.summary-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.summary-stat-card:hover {
+  border-color: var(--border-green);
+  transform: translateY(-2px);
+}
+
+/* Emoji icon above the value */
+.summary-stat-icon {
+  font-size: 1.3rem;
+  margin-bottom: 0.45rem;
+  display: block;
+  opacity: 0.7;
+}
+
+/* Large Bebas Neue number */
+.summary-stat-value {
+  font-family: var(--font-bebas);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+/* Uppercase label below the number */
+.summary-stat-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── CHART CARDS ───────────────────────────────────────────── */
+/* Wrapper card for Chart.js canvases */
+.chart-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+/* Uppercase title row above each chart */
+.chart-card-title {
+  font-family: var(--font-poppins);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Constrained height wrapper so charts don't stretch infinitely */
+.chart-canvas-wrap {
+  position: relative;
+  height: 260px;
+}
+
+/* ── TOP DIRECTORS LEADERBOARD ─────────────────────────────── */
+/* Single director row: rank | name | bar | count */
+.dir-row {
+  display: grid;
+  grid-template-columns: 1.4rem 1fr 80px 4rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dir-row:last-child {
+  border-bottom: none;
+}
+
+/* Sequential rank number */
+.dir-rank {
+  font-family: var(--font-bebas);
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Director name — truncates if too long */
+.dir-name {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Thin progress bar track */
+.dir-bar-wrap {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Filled portion of the progress bar */
+.dir-bar {
+  height: 100%;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* Film count label */
+.dir-count {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ── EMPTY PAGE STATE ──────────────────────────────────────── */
+/* Full-page centred empty state for stats and recommendations pages */
+.empty-page-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.empty-page-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.25rem;
+  opacity: 0.35;
+}
+
+.empty-page-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.empty-page-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+/* CTA button on empty state */
+.btn-go-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.65rem 1.5rem;
+  background: var(--green-glow);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-sm);
+  color: var(--green);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.btn-go-home:hover {
+  background: rgba(170, 255, 46, 0.25);
+  border-color: var(--green);
+}
+
+/* ── TASTE PROFILE GENRE TAGS ──────────────────────────────── */
+/* Lime pill showing a preferred genre with its score */
+.taste-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.38rem 0.9rem;
+  background: var(--green-glow);
+  border: 1px solid var(--border-green);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* ── RECOMMENDATION CARDS ──────────────────────────────────── */
+/* Individual movie recommendation card */
+.rec-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.rec-card:hover {
+  border-color: var(--border-green);
+  transform: translateY(-2px);
+}
+
+/* Top-right match percentage */
+.rec-match-pct {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-bebas);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+  text-align: right;
+}
+
+/* Tiny "match" label below the percentage */
+.rec-match-label {
+  font-family: var(--font-body);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  text-align: right;
+}
+
+/* Movie title — padded right to avoid overlap with match % */
+.rec-title {
+  font-family: var(--font-display);
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  padding-right: 3.5rem;
+  line-height: 1.3;
+}
+
+/* Year · duration · director line */
+.rec-meta {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* Italicised reason line at the bottom of each card */
+.rec-reason {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  border-top: 1px solid var(--border);
+  padding-top: 0.65rem;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+/* Inline empty-state message for a section that has no cards */
+.rec-section-empty {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 1.25rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ── DUPLICATE WARNING MODAL BUTTON ────────────────────────── */
+/* Cancel button inside the duplicate modal — secondary style */
+.dup-btn-cancel {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.dup-btn-cancel:hover {
+  border-color: var(--green-dim);
+  color: var(--text-primary);
+}
