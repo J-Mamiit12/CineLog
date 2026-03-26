@@ -1,42 +1,41 @@
 /* ============================================================
    CineLog — style.css
-   Shared stylesheet for all pages
+   Global CSS variables, font imports, and component styles.
+   Page layout and spacing are handled by TailwindCSS.
    ITEL 203 Group Performance Task #1
    ============================================================ */
 
-/* ── Google Fonts Import ─────────────────────────────────── */
+/* ── Google Fonts ─────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-/* ── CSS Variables (Design Tokens) ───────────────────────── */
+/* ── CSS Design Tokens ────────────────────────────────────── */
 :root {
-  --bg-root:      #0b0b0b;   /* deepest background */
-  --bg-surface:   #141414;   /* navbar, cards */
-  --bg-elevated:  #1c1c1c;   /* inputs, table header */
-  --bg-input:     #1a1a1a;   /* form inputs */
-  --green:        #aaff2e;   /* primary accent — lime green */
-  --green-dim:    #6db81a;   /* muted green for borders/hover */
-  --green-glow:   rgba(170, 255, 46, 0.15); /* soft glow */
-  --text-primary: #ffffff;
+  --bg-root:        #0b0b0b;   /* deepest background */
+  --bg-surface:     #141414;   /* navbar, cards */
+  --bg-elevated:    #1c1c1c;   /* inputs, table header */
+  --bg-input:       #1a1a1a;   /* form inputs */
+  --green:          #aaff2e;   /* primary accent — lime green */
+  --green-dim:      #6db81a;   /* muted green for borders/hover */
+  --green-glow:     rgba(170, 255, 46, 0.15);
+  --text-primary:   #ffffff;
   --text-secondary: #9a9a9a;
-  --text-muted:   #555555;
-  --border:       #252525;
-  --border-green: rgba(170, 255, 46, 0.25);
-  --red:          #ff4444;
-  --red-dim:      rgba(255, 68, 68, 0.12);
-  --success:      #aaff2e;
-  --radius-sm:    6px;
-  --radius-md:    10px;
-  --radius-lg:    14px;
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'Outfit', sans-serif;
-  --font-bebas:   'Bebas Neue', cursive;
-  --font-manrope:  'Manrope', sans-serif;
-  --font-poppins:  'Poppins', sans-serif;
+  --text-muted:     #555555;
+  --border:         #252525;
+  --border-green:   rgba(170, 255, 46, 0.25);
+  --red:            #ff4444;
+  --red-dim:        rgba(255, 68, 68, 0.12);
+  --success:        #aaff2e;
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-lg:      14px;
+  --font-display:   'Syne', sans-serif;
+  --font-body:      'Outfit', sans-serif;
+  --font-bebas:     'Bebas Neue', cursive;
+  --font-manrope:   'Manrope', sans-serif;
+  --font-poppins:   'Poppins', sans-serif;
 }
 
 /* ── Reset & Base ─────────────────────────────────────────── */
@@ -46,12 +45,13 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
+/* Body base with Aceternity-style dot grid overlay */
 body {
   background-color: var(--bg-root);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-weight: 400;
@@ -62,27 +62,7 @@ body {
 }
 
 /* ── NAVBAR ───────────────────────────────────────────────── */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 58px;
-}
-
-/* Brand / Logo */
-.nav-brand {
-  text-decoration: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
+/* Brand logo typography */
 .nav-brand .logo-text {
   font-family: var(--font-manrope);
   font-size: 1.35rem;
@@ -91,18 +71,12 @@ body {
   color: var(--text-primary);
 }
 
-/* The "LOG" part of CineLOG gets the green accent */
+/* "LOG" portion of "CineLOG" gets the lime accent */
 .nav-brand .logo-text span {
   color: var(--green);
 }
 
-/* Nav links list */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 0.15rem;
-}
-
+/* Individual nav link appearance and transitions */
 .nav-links a {
   color: var(--text-secondary);
   font-family: var(--font-poppins);
@@ -120,19 +94,13 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Active page indicator — lime green text */
 .nav-links a.active {
   color: var(--green);
 }
 
 /* ── HERO SECTION ─────────────────────────────────────────── */
-.hero {
-  position: relative;
-  padding: 5rem 2rem 3.5rem;
-  text-align: center;
-  overflow: hidden;
-}
-
-/* Radial green glow behind the title */
+/* Radial lime glow behind the hero title */
 .hero::before {
   content: '';
   position: absolute;
@@ -145,7 +113,7 @@ body {
   pointer-events: none;
 }
 
-/* Eyebrow badge above the title */
+/* Small uppercase pill badge above the main heading */
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -162,7 +130,7 @@ body {
   background: var(--green-glow);
 }
 
-/* Main hero heading */
+/* Large Bebas Neue display heading */
 .hero-title {
   font-family: var(--font-bebas);
   font-size: clamp(3.5rem, 9vw, 7rem);
@@ -174,12 +142,13 @@ body {
   margin-bottom: 1.25rem;
 }
 
-/* The highlighted word (e.g., "FRAME") */
-.hero-title .accent {
+/* Accented word inside the title (e.g., "FRAME") */
+.hero-title .accent,
+.accent {
   color: var(--green);
 }
 
-/* Hero subtitle */
+/* Hero subtitle / tagline */
 .hero-sub {
   font-size: 0.95rem;
   font-weight: 300;
@@ -190,24 +159,7 @@ body {
 }
 
 /* ── STATS BAR ────────────────────────────────────────────── */
-.stats-bar {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-  padding: 1.5rem 2rem;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-surface);
-  margin-bottom: 2.5rem;
-  font-family: var(--font-bebas);
-}
-
-.stat-item {
-  text-align: center;
-}
-
-/* Large green counter number */
+/* Large animated counter number */
 .stat-number {
   display: block;
   font-family: var(--font-display);
@@ -216,14 +168,15 @@ body {
   color: var(--green);
   line-height: 1;
   letter-spacing: 2px;
-  /* Smooth number change animation */
   transition: transform 0.2s ease;
 }
 
+/* Scale-up pop animation triggered by JS when value changes */
 .stat-number.bump {
   transform: scale(1.25);
 }
 
+/* Uppercase label below each counter */
 .stat-label {
   font-size: 0.65rem;
   font-weight: 600;
@@ -233,37 +186,8 @@ body {
   margin-top: 4px;
 }
 
-/* ── MAIN LAYOUT ──────────────────────────────────────────── */
-.main-container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
-/* Two-column grid: form | table */
-.two-col {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 1.75rem;
-  align-items: start;
-}
-
-/* Stack on small screens */
-@media (max-width: 860px) {
-  .two-col {
-    grid-template-columns: 1fr;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .stats-bar {
-    gap: 1.5rem;
-  }
-}
-
-/* ── CARD ─────────────────────────────────────────────────── */
+/* ── CARD (Add Movie panel) ───────────────────────────────── */
+/* Sticky form card that follows the scroll */
 .card {
   font-family: var(--font-poppins);
   background: var(--bg-surface);
@@ -271,10 +195,10 @@ body {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: sticky;
-  top: 78px; /* sticks below navbar */
+  top: 78px; /* Sits just below the fixed navbar */
 }
 
-/* Card header bar */
+/* Card title strip with icon */
 .card-header {
   font-family: var(--font-poppins);
   padding: 1.1rem 1.5rem;
@@ -299,22 +223,19 @@ body {
   margin-top: 1px;
 }
 
+/* Lime arrow icon in the card header */
 .card-header-icon {
   font-size: 0.85rem;
   color: var(--green);
 }
 
-/* Card content area */
-.card-body {
-  padding: 1.4rem 1.5rem;
-}
-
 /* ── FORM ELEMENTS ────────────────────────────────────────── */
+/* Bottom margin between each field group */
 .form-group {
   margin-bottom: 1rem;
 }
 
-/* Field label */
+/* Uppercase label above each input */
 .form-label {
   display: block;
   font-size: 0.7rem;
@@ -325,13 +246,13 @@ body {
   margin-bottom: 0.4rem;
 }
 
-/* Required asterisk */
+/* Required field asterisk in lime green */
 .form-label .req {
   color: var(--green);
   margin-left: 2px;
 }
 
-/* All form inputs share this base style */
+/* Shared base style for inputs, selects, and textareas */
 .form-control {
   width: 100%;
   background: var(--bg-input);
@@ -350,30 +271,31 @@ body {
   color: var(--text-muted);
 }
 
+/* Lime focus ring */
 .form-control:focus {
   border-color: var(--green-dim);
   box-shadow: 0 0 0 3px rgba(170, 255, 46, 0.08);
 }
 
-/* Error state */
+/* Red border and glow for validation errors */
 .form-control.is-error {
   border-color: var(--red);
   box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
 }
 
-/* Valid state */
+/* Lime border for valid inputs */
 .form-control.is-valid {
   border-color: var(--green-dim);
 }
 
-/* Disabled state — for rating when status != watched */
+/* Locked/disabled state (e.g., rating when not "Watched") */
 .form-control:disabled,
 .form-control[disabled] {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-/* Select dropdown custom arrow */
+/* Custom chevron arrow for dropdown selects */
 select.form-control {
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -382,37 +304,38 @@ select.form-control {
   padding-right: 32px;
 }
 
+/* Dark option background to match the overall theme */
 select.form-control option {
   background: var(--bg-surface);
 }
 
-/* Inline error message below field */
+/* Inline error message — hidden by default, shown via JS */
 .error-msg {
   font-size: 0.72rem;
   color: var(--red);
   margin-top: 0.3rem;
-  display: none;       /* hidden by default */
+  display: none;
   align-items: center;
   gap: 4px;
 }
 
 .error-msg.show {
-  display: flex;       /* shown when .show class is added */
+  display: flex;
 }
 
-/* Two-column row inside the form */
+/* Two-column side-by-side row inside the form (e.g., Year + Duration) */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.85rem;
 }
 
-/* ── STAR RATING ──────────────────────────────────────────── */
+/* ── STAR RATING INPUT ────────────────────────────────────── */
 .star-wrapper {
   margin-top: 0.35rem;
 }
 
-/* Disabled overlay message shown when rating is locked */
+/* Hint text shown when rating is locked (status is not "Watched") */
 .rating-lock-msg {
   font-size: 0.72rem;
   color: var(--text-muted);
@@ -425,11 +348,13 @@ select.form-control option {
   display: block;
 }
 
+/* Flex row containing the five star buttons */
 .star-group {
   display: flex;
   gap: 3px;
 }
 
+/* Individual star toggle button */
 .star-btn {
   background: none;
   border: none;
@@ -447,14 +372,14 @@ select.form-control option {
   transform: scale(1.2);
 }
 
-/* When rating group is disabled */
+/* Disable interaction and dim stars when rating is locked */
 .star-group.disabled .star-btn {
   pointer-events: none;
   opacity: 0.25;
   cursor: not-allowed;
 }
 
-/* ── SUBMIT BUTTON ────────────────────────────────────────── */
+/* ── PRIMARY SUBMIT BUTTON ────────────────────────────────── */
 .btn-primary {
   width: 100%;
   padding: 0.8rem;
@@ -482,7 +407,8 @@ select.form-control option {
   transform: translateY(0);
 }
 
-/* ── TABLE PANEL ──────────────────────────────────────────── */
+/* ── WATCHLIST TABLE PANEL ────────────────────────────────── */
+/* Outer container for the movie table */
 .table-panel {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -490,7 +416,7 @@ select.form-control option {
   overflow: hidden;
 }
 
-/* Panel top header */
+/* Header row: title on the left, search bar on the right */
 .table-panel-header {
   padding: 1.1rem 1.5rem;
   border-bottom: 1px solid var(--border);
@@ -515,13 +441,14 @@ select.form-control option {
   color: var(--text-muted);
 }
 
-/* Search input */
+/* Search bar with icon overlaid on the left */
 .search-wrap {
   position: relative;
   display: flex;
   align-items: center;
 }
 
+/* Non-interactive search icon overlay */
 .search-icon {
   position: absolute;
   left: 9px;
@@ -552,6 +479,7 @@ select.form-control option {
 }
 
 /* ── FILTER TABS ──────────────────────────────────────────── */
+/* Horizontally scrollable pill tab strip above the table */
 .filter-tabs {
   display: flex;
   gap: 0.3rem;
@@ -560,6 +488,7 @@ select.form-control option {
   overflow-x: auto;
 }
 
+/* Individual pill-shaped filter button */
 .filter-tab {
   padding: 0.28rem 0.85rem;
   font-size: 0.75rem;
@@ -580,6 +509,7 @@ select.form-control option {
   color: var(--green);
 }
 
+/* Selected/active filter tab */
 .filter-tab.active {
   background: var(--green-glow);
   border-color: var(--border-green);
@@ -587,9 +517,9 @@ select.form-control option {
 }
 
 /* ── DATA TABLE ───────────────────────────────────────────── */
+/* Horizontal scroll wrapper for small screens */
 .table-scroll {
   overflow-x: auto;
-  
 }
 
 table {
@@ -599,12 +529,13 @@ table {
   font-size: 0.84rem;
 }
 
-/* Table header row */
+/* Elevated background for the sticky header row */
 thead tr {
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
 }
 
+/* Sortable column header */
 th {
   padding: 0.75rem 1rem;
   text-align: left;
@@ -622,7 +553,7 @@ th:hover {
   color: var(--green);
 }
 
-/* Table body rows */
+/* Table body rows with slide-in entrance animation */
 tbody tr {
   border-bottom: 1px solid rgba(37, 37, 37, 0.8);
   transition: background 0.15s;
@@ -633,7 +564,7 @@ tbody tr:hover {
   background: rgba(255, 255, 255, 0.025);
 }
 
-/* Row entrance animation */
+/* Slide-in animation for newly rendered rows */
 @keyframes rowSlideIn {
   from { opacity: 0; transform: translateX(-6px); }
   to   { opacity: 1; transform: translateX(0); }
@@ -644,7 +575,7 @@ td {
   vertical-align: middle;
 }
 
-/* Movie title cell with director sub-text */
+/* Title cell: truncates overflow, shows director and duration below */
 .movie-title-cell {
   font-weight: 500;
   color: var(--text-primary);
@@ -662,7 +593,7 @@ td {
   margin-top: 1px;
 }
 
-/* Row number */
+/* Dim sequential row number */
 .row-num {
   color: var(--text-muted);
   font-size: 0.78rem;
@@ -681,17 +612,14 @@ td {
   white-space: nowrap;
 }
 
-.badge-watched  { background: rgba(170,255,46,0.1);  color: var(--green);      border: 1px solid rgba(170,255,46,0.25); }
-.badge-watching { background: rgba(255,200,50,0.1);  color: #ffc832;           border: 1px solid rgba(255,200,50,0.25); }
-.badge-plan     { background: rgba(100,100,100,0.15);color: var(--text-muted); border: 1px solid var(--border); }
-.badge-dropped  { background: rgba(255,68,68,0.1);   color: var(--red);        border: 1px solid rgba(255,68,68,0.25); }
-.badge-deleted {
-  background: rgba(239, 68, 68, 0.1); /* Soft red background */
-  color: #ef4444; /* Red text */
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
+.badge-watched  { background: rgba(170,255,46,0.1);   color: var(--green);      border: 1px solid rgba(170,255,46,0.25); }
+.badge-watching { background: rgba(255,200,50,0.1);   color: #ffc832;           border: 1px solid rgba(255,200,50,0.25); }
+.badge-plan     { background: rgba(100,100,100,0.15); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-dropped  { background: rgba(255,68,68,0.1);    color: var(--red);        border: 1px solid rgba(255,68,68,0.25); }
+.badge-deleted  { background: rgba(239,68,68,0.1);    color: #ef4444;           border: 1px solid rgba(239,68,68,0.3); }
 
 /* ── GENRE PILL ───────────────────────────────────────────── */
+/* Subtle pill label for the genre column */
 .genre-pill {
   display: inline-block;
   padding: 0.15rem 0.55rem;
@@ -702,18 +630,19 @@ td {
   color: var(--text-secondary);
 }
 
-/* ── STAR RATING DISPLAY (in table) ──────────────────────── */
+/* ── STAR RATING DISPLAY (read-only, shown in table rows) ─── */
 .stars-display {
   color: var(--green);
   font-size: 0.82rem;
   letter-spacing: 1px;
 }
 
+/* Unfilled stars are dimmed */
 .stars-display .empty {
   color: var(--border);
 }
 
-/* ── DELETE BUTTON ────────────────────────────────────────── */
+/* ── DELETE ROW BUTTON ────────────────────────────────────── */
 .btn-delete {
   display: inline-flex;
   align-items: center;
@@ -736,12 +665,14 @@ td {
 }
 
 /* ── EMPTY STATE ──────────────────────────────────────────── */
+/* Displayed when no movies match the current filter or search */
 .empty-state {
   padding: 3.5rem 2rem;
   text-align: center;
   color: var(--text-muted);
 }
 
+/* Large dimmed movie icon */
 .empty-icon {
   font-size: 2.5rem;
   display: block;
@@ -754,6 +685,7 @@ td {
 }
 
 /* ── TOAST NOTIFICATIONS ──────────────────────────────────── */
+/* Fixed bottom-right stack of notification toasts */
 .toast-container {
   position: fixed;
   bottom: 1.75rem;
@@ -780,6 +712,7 @@ td {
   animation: toastIn 0.3s ease;
 }
 
+/* Left-border color indicates success (lime) or error (red) */
 .toast.success { border-left: 3px solid var(--green); }
 .toast.error   { border-left: 3px solid var(--red); }
 
@@ -793,15 +726,7 @@ td {
   to   { opacity: 0; transform: translateY(6px); }
 }
 
-/* ── FOOTER ───────────────────────────────────────────────── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 1.5rem 2rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
+/* ── FOOTER LINKS ─────────────────────────────────────────── */
 footer a {
   color: var(--green-dim);
   text-decoration: none;
@@ -812,18 +737,8 @@ footer a:hover {
   color: var(--green);
 }
 
-/* ── ABOUT / DEV PAGES ────────────────────────────────────── */
-.page-hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 4rem 2rem 2.5rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
+/* ── ABOUT & DEVELOPER PAGES ──────────────────────────────── */
+/* Pill eyebrow label above inner-page section titles */
 .section-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -840,6 +755,7 @@ footer a:hover {
   background: var(--green-glow);
 }
 
+/* Large Bebas Neue section heading */
 .section-title {
   font-family: var(--font-bebas);
   font-size: clamp(2.2rem, 6vw, 4rem);
@@ -847,11 +763,12 @@ footer a:hover {
   letter-spacing: 3px;
   text-transform: uppercase;
   line-height: 1;
-  margin-bottom: 0.75rem;                   
+  margin-bottom: 0.75rem;
 }
 
 .section-title .accent { color: var(--green); }
 
+/* Subtitle text beneath the section heading */
 .section-sub {
   font-size: 0.95rem;
   font-weight: 300;
@@ -859,17 +776,9 @@ footer a:hover {
   max-width: 500px;
   line-height: 1.7;
   text-align: center;
-  align-items: center;
 }
 
-/* Content wrapper on About/Dev pages */
-.content-grid {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
-/* Info cards used on About page */
+/* ── INFO CARDS (About page) ──────────────────────────────── */
 .info-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -897,7 +806,7 @@ footer a:hover {
   line-height: 1.75;
 }
 
-/* Feature bullet list */
+/* Auto-fill feature item grid */
 .feature-list {
   list-style: none;
   display: grid;
@@ -906,6 +815,7 @@ footer a:hover {
   margin-top: 0.9rem;
 }
 
+/* Feature item tile with lime arrow bullet */
 .feature-list li {
   display: flex;
   align-items: flex-start;
@@ -926,7 +836,7 @@ footer a:hover {
   flex-shrink: 0;
 }
 
-/* Tech badges */
+/* Technology / tool badge pill */
 .tech-badge {
   display: inline-flex;
   align-items: center;
@@ -941,7 +851,7 @@ footer a:hover {
   margin: 0.2rem;
 }
 
-/* Meta info grid */
+/* Grid of course metadata boxes */
 .meta-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
@@ -971,13 +881,7 @@ footer a:hover {
 }
 
 /* ── DEVELOPER CARDS ──────────────────────────────────────── */
-.dev-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
+/* Individual developer profile card */
 .dev-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -986,12 +890,13 @@ footer a:hover {
   transition: border-color 0.2s, transform 0.2s;
 }
 
+/* Lift and border glow on hover */
 .dev-card:hover {
   border-color: var(--border-green);
   transform: translateY(-3px);
 }
 
-/* Avatar circle */
+/* Circular avatar wrapper with lime border */
 .dev-avatar {
   width: 100px;
   height: 100px;
@@ -1007,13 +912,13 @@ footer a:hover {
   color: var(--green);
   margin-bottom: 1rem;
   overflow: hidden;
-
-
 }
+
+/* Profile photo fills the avatar circle */
 .dev-avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   display: block;
 }
 
@@ -1026,6 +931,7 @@ footer a:hover {
   margin-bottom: 0.2rem;
 }
 
+/* Uppercase lime role label */
 .dev-role {
   font-size: 0.68rem;
   font-weight: 600;
@@ -1041,46 +947,39 @@ footer a:hover {
   line-height: 1.65;
 }
 
-/* Divider line */
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 1.75rem 0;
-}
-
-
-/* ==========================================
-   ADDED: CLICKABLE ROW STYLES 
-   ========================================== */
+/* ── CLICKABLE TABLE ROW ──────────────────────────────────── */
+/* Pointer cursor to indicate the row is clickable */
 .clickable-row {
   cursor: pointer;
 }
 
+/* Subtle lime tint on row hover to reinforce interactivity */
 .clickable-row:hover {
-  background-color: rgba(170, 255, 46, 0.05); /* Soft green background on hover */
+  background-color: rgba(170, 255, 46, 0.05);
 }
 
-/* ==========================================
-   ADDED: MODAL BOX STYLES 
-   ========================================== */
+/* ── MODAL OVERLAYS ───────────────────────────────────────── */
+/* Full-screen blurred backdrop — hidden by default */
 .modal-overlay {
-  display: none; 
+  display: none;
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.75); 
-  z-index: 9999; 
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(4px);
 }
 
+/* Active state toggled via JS */
 .modal-overlay.active {
-  display: flex; 
+  display: flex;
 }
 
+/* Modal dialog box */
 .modal-content {
-  background: var(--bg-elevated, #1e1e1e); 
-  border: 1px solid var(--border-green, #4ade80);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-green);
   padding: 2rem;
   border-radius: 12px;
   width: 90%;
@@ -1089,6 +988,12 @@ footer a:hover {
   text-align: left;
 }
 
+/* Smaller variant used for the Update Status modal */
+.modal-content--sm {
+  max-width: 350px;
+}
+
+/* Close (×) button positioned in the top-right corner */
 .close-modal {
   position: absolute;
   top: 15px;
@@ -1100,29 +1005,34 @@ footer a:hover {
 }
 
 .close-modal:hover {
-  color: var(--green, #4ade80);
+  color: var(--green);
 }
 
+/* Movie title heading inside the Notes modal */
 #modalMovieTitle {
   margin-top: 0;
   margin-bottom: 1rem;
-  color: var(--green, #4ade80);
+  color: var(--green);
 }
 
+/* Notes body text */
 #modalMovieNotes {
   color: #ccc;
   line-height: 1.6;
 }
 
+/* Header row: movie title + status badge
+   padding-right prevents the badge from being covered by the close (×) button */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.5rem;
-  padding-right: 25px; /* Para hindi matakpan ng X button yung badge */
+  padding-right: 25px;
   gap: 10px;
 }
 
+/* Year · duration · genre meta row */
 .modal-meta {
   color: var(--text-secondary);
   font-size: 0.85rem;
@@ -1132,6 +1042,7 @@ footer a:hover {
   gap: 8px;
 }
 
+/* Director and rating info block */
 .modal-extra-info {
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -1142,22 +1053,26 @@ footer a:hover {
   color: var(--text-primary);
 }
 
+/* Badge inside table cells — clickable to open the Update Status modal */
 td .badge {
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+/* Scale and brighten badge on hover to hint at interactivity */
 td .badge:hover {
   transform: scale(1.08);
   filter: brightness(1.2);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* Custom genre input — hidden by default, revealed when "Other" is selected */
 #customGenreGroup {
-  display: none; /* Nakatago by default */
+  display: none;
   margin-top: 10px;
 }
 
+/* Visible state activated by JS when genre dropdown is set to "Other" */
 #customGenreGroup.active {
-  display: block; /* Lalabas kapag 'Other' ang pinili */
+  display: block;
 }
