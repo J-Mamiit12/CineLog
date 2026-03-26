@@ -4,22 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CineLog — Movie Watchlist Manager</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind custom color tokens — mapped to CineLog's design system -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface:      '#141414',
+            elevated:     '#1c1c1c',
+            accent:       '#aaff2e',
+            'accent-dim': '#6db81a',
+            secondary:    '#9a9a9a',
+            muted:        '#555555',
+            stroke:       '#252525',
+            danger:       '#ff4444',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global CSS variables, component styles, and the dot-grid background -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <nav class="navbar">
-    <a class="nav-brand" href="index.html">
+  <!-- ══════════════════════════════════════════════════════
+       NAVBAR — Sticky top bar with brand logo and nav links
+       ══════════════════════════════════════════════════════ -->
+  <nav class="sticky top-0 z-[100] bg-surface border-b border-stroke px-8 flex items-center justify-between h-[58px]">
+
+    <!-- Brand logo -->
+    <a class="nav-brand no-underline cursor-pointer flex items-center" href="index.html">
       <span class="logo-text">Cine<span>LOG</span></span>
     </a>
-    <ul class="nav-links">
+
+    <!-- Navigation links — hidden on mobile, shown on medium+ screens -->
+    <ul class="nav-links list-none hidden md:flex gap-0.5">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="developers.html">Developers</a></li>
     </ul>
   </nav>
 
-  <section class="hero">
+  <!-- ══════════════════════════════════════════════════════
+       HERO — Page headline and tagline
+       ══════════════════════════════════════════════════════ -->
+  <section class="hero relative py-20 pb-14 text-center overflow-hidden px-8">
     <div class="hero-eyebrow">🎞 Your Personal Cinema</div>
     <h1 class="hero-title">
       Track Every <span class="accent">Frame</span>
@@ -30,34 +64,52 @@
     </p>
   </section>
 
-  <div class="stats-bar">
-    <div class="stat-item">
+  <!-- ══════════════════════════════════════════════════════
+       STATS BAR — Live counters for watchlist totals
+       ══════════════════════════════════════════════════════ -->
+  <div class="flex justify-center gap-12 flex-wrap py-6 px-8 border-y border-stroke bg-surface mb-10">
+
+    <!-- Total movies counter -->
+    <div class="text-center">
       <span class="stat-number" id="stat-total">0</span>
       <span class="stat-label">Total</span>
     </div>
-    <div class="stat-item">
+
+    <!-- Watched movies counter -->
+    <div class="text-center">
       <span class="stat-number" id="stat-watched">0</span>
       <span class="stat-label">Watched</span>
     </div>
-    <div class="stat-item">
+
+    <!-- Currently watching counter -->
+    <div class="text-center">
       <span class="stat-number" id="stat-watching">0</span>
       <span class="stat-label">Watching</span>
     </div>
-    <div class="stat-item">
+
+    <!-- Plan to Watch counter -->
+    <div class="text-center">
       <span class="stat-number" id="stat-plan">0</span>
       <span class="stat-label">Plan to Watch</span>
     </div>
-    <div class="stat-item">
+
+    <!-- Average rating display -->
+    <div class="text-center">
       <span class="stat-number" id="stat-avg">—</span>
       <span class="stat-label">Avg Rating</span>
     </div>
   </div>
 
-  <main class="main-container">
-    <div class="two-col">
+  <!-- ══════════════════════════════════════════════════════
+       MAIN CONTENT — Two-column layout: form | table
+       ══════════════════════════════════════════════════════ -->
+  <main class="max-w-[1140px] mx-auto px-8 pb-16">
+    <div class="grid grid-cols-1 md:grid-cols-[360px_1fr] gap-7 items-start">
 
+      <!-- ── ADD MOVIE CARD ──────────────────────────────── -->
       <div class="card">
 
+        <!-- Card title strip -->
         <div class="card-header">
           <span class="card-header-icon">▸</span>
           <div>
@@ -66,9 +118,11 @@
           </div>
         </div>
 
-        <div class="card-body">
+        <!-- Form body -->
+        <div class="p-6">
           <form id="movie-form" novalidate>
 
+            <!-- Movie title field -->
             <div class="form-group">
               <label class="form-label" for="movieTitle">
                 Movie Title <span class="req">*</span>
@@ -82,6 +136,7 @@
               <div class="error-msg" id="err-title">⚠ Title is required.</div>
             </div>
 
+            <!-- Year and Duration side by side -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="releaseYear">
@@ -109,6 +164,7 @@
               </div>
             </div>
 
+            <!-- Director field -->
             <div class="form-group">
               <label class="form-label" for="director">Director</label>
               <input
@@ -119,6 +175,7 @@
               <div class="error-msg" id="err-director">⚠ No numbers in name.</div>
             </div>
 
+            <!-- Genre and Status side by side -->
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="genre">
@@ -141,11 +198,12 @@
                   <option value="Documentary">Documentary</option>
                   <option value="Other">Other</option>
                 </select>
-                
-                <div id="customGenreGroup" style="display: none; margin-top: 10px;">
+
+                <!-- Custom genre text input — shown only when "Other" is selected -->
+                <div id="customGenreGroup" class="mt-2.5">
                   <input type="text" class="form-control" id="customGenre" placeholder="Type custom genre here..." />
                 </div>
-                
+
                 <div class="error-msg" id="err-genre">⚠ Select a genre.</div>
               </div>
 
@@ -164,6 +222,7 @@
               </div>
             </div>
 
+            <!-- Star rating input — locked until status is "Watched" -->
             <div class="form-group">
               <label class="form-label">Your Rating</label>
               <div class="star-wrapper">
@@ -181,6 +240,7 @@
               </div>
             </div>
 
+            <!-- Optional review notes textarea -->
             <div class="form-group">
               <label class="form-label" for="notes">Notes / Review</label>
               <textarea
@@ -197,8 +257,13 @@
             </button>
 
           </form>
-        </div></div><div class="table-panel">
+        </div>
+      </div><!-- /card -->
 
+      <!-- ── WATCHLIST TABLE PANEL ──────────────────────── -->
+      <div class="table-panel">
+
+        <!-- Panel header: title + search input -->
         <div class="table-panel-header">
           <div>
             <h2>My Watchlist</h2>
@@ -214,6 +279,7 @@
           </div>
         </div>
 
+        <!-- Filter tabs — All / Watched / Watching / Plan / Dropped / History -->
         <div class="filter-tabs">
           <button class="filter-tab active" data-filter="all">All</button>
           <button class="filter-tab" data-filter="watched">Watched</button>
@@ -223,6 +289,7 @@
           <button class="filter-tab" data-filter="deleted">History</button>
         </div>
 
+        <!-- Scrollable table container -->
         <div class="table-scroll">
           <table id="movie-table">
             <thead>
@@ -239,18 +306,22 @@
             <tbody id="movie-tbody"></tbody>
           </table>
 
+          <!-- Empty state — shown when no movies match -->
           <div class="empty-state" id="empty-state">
             <span class="empty-icon">🎬</span>
             <p>No movies yet. Add your first one!</p>
           </div>
         </div>
 
-      </div>
+      </div><!-- /table-panel -->
 
-    </div>
+    </div><!-- /two-col grid -->
   </main>
 
-  <footer>
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════ -->
+  <footer class="border-t border-stroke py-6 px-8 text-center text-muted text-xs">
     <p>
       CineLog &mdash; ITEL 203 Group Performance Task #1 &bull;
       HTML &middot; CSS &middot; JavaScript &bull;
@@ -258,43 +329,57 @@
     </p>
   </footer>
 
-<div id="notesModal" class="modal-overlay">
+  <!-- ══════════════════════════════════════════════════════
+       NOTES MODAL — Opens when a table row is clicked
+       ══════════════════════════════════════════════════════ -->
+  <div id="notesModal" class="modal-overlay">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
-      
+
+      <!-- Movie title + status badge row -->
       <div class="modal-header">
         <h3 id="modalMovieTitle">Movie Title</h3>
         <span id="modalMovieStatus" class="badge">Status</span>
       </div>
 
+      <!-- Year · Duration · Genre meta row -->
       <div class="modal-meta">
-        <span id="modalMovieYear">2023</span> &bull; 
-        <span id="modalMovieDuration">120m</span> &bull; 
+        <span id="modalMovieYear">2023</span> &bull;
+        <span id="modalMovieDuration">120m</span> &bull;
         <span class="genre-pill" id="modalMovieGenre">Action</span>
       </div>
 
+      <!-- Director and rating details -->
       <div class="modal-extra-info">
         <div><strong>Director:</strong> <span id="modalMovieDirector">N/A</span></div>
-        <div style="margin-top: 5px;"><strong>Rating:</strong> <span id="modalMovieRating">N/A</span></div>
+        <div class="mt-1"><strong>Rating:</strong> <span id="modalMovieRating">N/A</span></div>
       </div>
 
-      <div class="divider"></div>
+      <!-- Divider line -->
+      <div class="h-px bg-stroke my-5"></div>
 
+      <!-- Notes / review body -->
       <div class="modal-body">
-        <strong style="color: var(--text-primary); font-size: 0.9rem;">My Notes / Review:</strong>
-        <p id="modalMovieNotes" style="margin-top: 5px;">Notes will appear here...</p>
+        <strong class="text-white text-[0.9rem]">My Notes / Review:</strong>
+        <p id="modalMovieNotes" class="mt-1.5">Notes will appear here...</p>
       </div>
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════
+       UPDATE STATUS MODAL — Opens when a status badge is clicked
+       ══════════════════════════════════════════════════════ -->
   <div id="updateModal" class="modal-overlay">
-    <div class="modal-content" style="max-width: 350px;">
+    <div class="modal-content modal-content--sm">
       <span class="close-update-modal close-modal">&times;</span>
-      <h3 style="margin-top: 0; color: var(--green); margin-bottom: 5px;">Update Status</h3>
-      <p id="updateMovieTitle" style="margin-bottom: 20px; color: var(--text-secondary); font-size: 0.9rem;">Movie Title</p>
+
+      <!-- Modal heading and target movie name -->
+      <h3 class="mt-0 text-accent mb-1.5">Update Status</h3>
+      <p id="updateMovieTitle" class="mb-5 text-secondary text-[0.9rem]">Movie Title</p>
 
       <input type="hidden" id="updateMovieId" />
 
+      <!-- New status dropdown -->
       <div class="form-group">
         <label class="form-label" for="updateStatus">New Status</label>
         <select class="form-control" id="updateStatus">
@@ -305,6 +390,7 @@
         </select>
       </div>
 
+      <!-- Star rating inside the update modal -->
       <div class="form-group">
         <label class="form-label">Rating</label>
         <div class="star-wrapper">
@@ -320,14 +406,16 @@
         </div>
       </div>
 
-      <button id="btnSaveUpdate" class="btn-primary" style="width: 100%; margin-top: 10px;">
+      <!-- Save button -->
+      <button id="btnSaveUpdate" class="btn-primary mt-2.5">
         Save Changes
       </button>
     </div>
   </div>
 
+  <!-- Toast notification container (managed by JS) -->
   <div class="toast-container" id="toast-container"></div>
-  <script src="script.js"></script>
 
+  <script src="script.js"></script>
 </body>
 </html>
