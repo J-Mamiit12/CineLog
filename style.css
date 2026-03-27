@@ -2160,3 +2160,91 @@ tbody tr:hover .badge { animation: tagSpin3D 0.6s cubic-bezier(0.175, 0.885, 0.3
         left: 200%;
       }
     }
+    /* ── 🎬 GLOBAL CINEMATIC ANIMATIONS (ALL PAGES) ──────────────────── */
+
+/* 1. Base Spring & Blur Entrance */
+@keyframes cinematicEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* 2. Apply Entrance to Headers & Titles across all pages */
+.hero-eyebrow, .hero-title, .hero-sub,
+.section-eyebrow, .section-title, .section-sub {
+  opacity: 0;
+  animation: cinematicEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Stagger Headers smoothly */
+.hero-eyebrow, .section-eyebrow { animation-delay: 0.1s; }
+.hero-title, .section-title     { animation-delay: 0.2s; }
+.hero-sub, .section-sub         { animation-delay: 0.3s; }
+
+/* 3. Apply Entrance to All Cards, Charts & Panels */
+.card, .table-panel, .chart-card, .rec-card, 
+.dev-card, .info-card, .step-card, .stat-pill, .glas-panel {
+  opacity: 0;
+  animation: cinematicEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  /* Setup for the hover effect */
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Delay Home page specific panels so the title loads first */
+.glas-panel  { animation-delay: 0.4s; }
+.card        { animation-delay: 0.5s; }
+.table-panel { animation-delay: 0.6s; }
+
+/* Stagger grids dynamically (Picks, Developers, About, Charts) */
+.stat-pill:nth-child(1), .step-card:nth-child(1), .rec-card:nth-child(1), .chart-card:nth-child(1), .dev-card:nth-child(1), .info-card:nth-child(1) { animation-delay: 0.2s; }
+.stat-pill:nth-child(2), .step-card:nth-child(2), .rec-card:nth-child(2), .chart-card:nth-child(2), .dev-card:nth-child(2), .info-card:nth-child(2) { animation-delay: 0.3s; }
+.stat-pill:nth-child(3), .step-card:nth-child(3), .rec-card:nth-child(3), .chart-card:nth-child(3), .dev-card:nth-child(3), .info-card:nth-child(3) { animation-delay: 0.4s; }
+.stat-pill:nth-child(4), .step-card:nth-child(4), .rec-card:nth-child(4), .chart-card:nth-child(4), .dev-card:nth-child(4), .info-card:nth-child(4) { animation-delay: 0.5s; }
+.stat-pill:nth-child(5), .step-card:nth-child(5), .rec-card:nth-child(5), .chart-card:nth-child(5), .dev-card:nth-child(5), .info-card:nth-child(5) { animation-delay: 0.6s; }
+.stat-pill:nth-child(6), .step-card:nth-child(6), .rec-card:nth-child(6), .chart-card:nth-child(6), .dev-card:nth-child(6), .info-card:nth-child(6) { animation-delay: 0.7s; }
+
+/* 4. VIP Shine Hover Effect (Applied to all interactive cards) */
+.info-card::before, .dev-card::before, .chart-card::before, .rec-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(170, 255, 46, 0.08) 50%, /* Lime green subtle glow */
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: all 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Trigger Shine & Lift on Hover */
+.info-card:hover, .dev-card:hover, .chart-card:hover, .rec-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(170, 255, 46, 0.3); /* Highlights border in lime green */
+}
+
+.info-card:hover::before, .dev-card:hover::before, .chart-card:hover::before, .rec-card:hover::before {
+  animation: shineSweep 0.8s forwards;
+}
+
+@keyframes shineSweep {
+  100% {
+    left: 200%;
+  }
+}
