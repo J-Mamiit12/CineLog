@@ -21,6 +21,149 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── IMPROVED TECH BADGE ───────────────────────────────── */
+    .tech-badge-v2 {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+      cursor: default;
+    }
+    .tech-badge-v2 i { font-size: 0.85rem; }
+
+    /* colour variants */
+    .badge-html  { background: rgba(228,77,38,0.12);  color:#e44d26; border-color:rgba(228,77,38,0.25); }
+    .badge-css   { background: rgba(38,77,228,0.12);  color:#264fd1; border-color:rgba(38,77,228,0.25); }
+    .badge-js    { background: rgba(247,223,30,0.12); color:#f7df1e; border-color:rgba(247,223,30,0.25);}
+    .badge-local { background: rgba(170,255,46,0.10); color:#aaff2e; border-color:rgba(170,255,46,0.25);}
+    .badge-chart { background: rgba(255,99,132,0.10); color:#ff6384; border-color:rgba(255,99,132,0.25);}
+    .badge-tail  { background: rgba(56,189,248,0.10); color:#38bdf8; border-color:rgba(56,189,248,0.25);}
+    .badge-net   { background: rgba(0,194,255,0.10);  color:#00c2ff; border-color:rgba(0,194,255,0.25);}
+    .badge-vsc   { background: rgba(0,122,204,0.12);  color:#007acc; border-color:rgba(0,122,204,0.25);}
+    .badge-omdb  { background: rgba(255,165,0,0.10);  color:#ffaa00; border-color:rgba(255,165,0,0.25); }
+    .badge-git   { background: rgba(241,80,47,0.10);  color:#f1502f; border-color:rgba(241,80,47,0.25); }
+
+    .tech-badge-v2:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+
+    /* ── FEATURE GRID ──────────────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid #252525;
+      border-radius: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .feature-item:hover {
+      border-color: rgba(170,255,46,0.3);
+      background: rgba(170,255,46,0.04);
+    }
+    .feature-item i {
+      color: #aaff2e;
+      font-size: 0.9rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .feature-item-text { display:flex; flex-direction:column; gap:2px; }
+    .feature-item-title { color:#e5e5e5; font-size:0.83rem; font-weight:600; }
+    .feature-item-desc  { color:#666; font-size:0.74rem; line-height:1.4; }
+
+    /* ── STEP CARDS ────────────────────────────────────────── */
+    .step-card {
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid #252525;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .step-card:hover {
+      border-color: #aaff2e;
+      box-shadow: 0 0 18px rgba(170,255,46,0.12);
+    }
+    .step-num {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #aaff2e;
+      opacity: 0.18;
+      line-height:1;
+      margin-bottom: 8px;
+      transition: opacity 0.3s;
+    }
+    .step-card:hover .step-num { opacity: 1; }
+
+    /* ── META BOX tweaks ───────────────────────────────────── */
+    .meta-box-v2 {
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid #252525;
+      border-radius:10px;
+    }
+    .meta-lbl-v2 { font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:#555; }
+    .meta-val-v2 { font-size:0.88rem; color:#e5e5e5; font-weight:600; }
+
+    /* ── FUTURE ITEM ───────────────────────────────────────── */
+    .future-item {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:11px 14px;
+      border:1px solid #252525;
+      border-radius:10px;
+      background:rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .future-item:hover {
+      border-color:rgba(170,255,46,0.25);
+      background:rgba(170,255,46,0.03);
+    }
+    .future-item i { color:#555; font-size:0.9rem; width:18px; text-align:center; flex-shrink:0; transition: color 0.2s; }
+    .future-item:hover i { color:#aaff2e; }
+    .future-item span { font-size:0.83rem; color:#9a9a9a; }
+
+    /* ── SECTION DIVIDER ───────────────────────────────────── */
+    .accent-divider {
+      width:40px; height:3px;
+      background: #aaff2e;
+      border-radius:2px;
+      margin-bottom: 12px;
+    }
+
+    /* ── STAT MINI PILL ────────────────────────────────────── */
+    .stat-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px 12px;
+      border-radius:999px;
+      background:rgba(170,255,46,0.08);
+      border:1px solid rgba(170,255,46,0.2);
+      font-size:0.78rem;
+      color:#aaff2e;
+      font-weight:600;
+    }
+  </style>
 </head>
 <body>
 
@@ -37,6 +180,7 @@
     </ul>
   </nav>
 
+  <!-- PAGE HERO -->
   <div class="flex flex-col items-center text-center pt-32 pb-10 px-8 max-w-4xl mx-auto">
     <div class="section-eyebrow">📋 Project Case Study</div>
     <h1 class="section-title">About <span class="accent">CineLog</span></h1>
@@ -44,110 +188,214 @@
       A comprehensive JavaScript-powered movie watchlist manager built for
       ITEL 203 — Web Systems and Technologies.
     </p>
+    <!-- quick-stat pills -->
+    <div class="flex flex-wrap justify-center gap-2 mt-4">
+      <span class="stat-pill"><i class="fas fa-users"></i> 3 Developers</span>
+      <span class="stat-pill"><i class="fas fa-code"></i> 5 Pages</span>
+      <span class="stat-pill"><i class="fas fa-layer-group"></i> Vanilla JS</span>
+      <span class="stat-pill"><i class="fas fa-cloud-upload-alt"></i> GitHub Deployed</span>
+    </div>
   </div>
 
   <div class="max-w-[1140px] mx-auto px-8 pb-16 flex flex-col gap-6">
 
+    <!-- ── PURPOSE ─────────────────────────────────────────── -->
     <div class="info-card">
+      <div class="accent-divider"></div>
       <h3 class="text-xl font-bold text-white mb-3">🎯 Purpose of the System</h3>
       <p class="text-secondary leading-relaxed">
-        CineLog is a dynamic, client-side web application that allows users to manage their personal movie watchlist. Users can add movies with detailed metadata, track their viewing status, rate films, and filter or search through their collection — all without a backend server. Data is stored locally using the browser's <strong>localStorage API</strong>, making it persist across page reloads.
+        <strong class="text-white">CineLog</strong> is a dynamic, fully client-side web application that empowers users to manage their personal movie watchlist with ease. Users can add films with rich metadata — title, director, genre, release year, and duration — then track their viewing progress, leave star ratings, and search or filter their entire collection. No backend server is required; all data is persisted using the browser's <strong class="text-white">localStorage API</strong>, ensuring the collection survives page reloads and browser restarts.
       </p>
       <p class="text-secondary leading-relaxed mt-3">
-        The project demonstrates proficiency in DOM manipulation, event-driven programming, form validation, data visualization (Chart.js), and modern front-end design principles as required by the course syllabus.
+        Built as a Group Performance Task for <strong class="text-white">ITEL 203 — Web Systems and Technologies</strong>, the project showcases real-world proficiency in DOM manipulation, event-driven programming, strict form validation, algorithmic recommendation logic, and interactive data visualization with Chart.js — all crafted with clean, maintainable vanilla JavaScript.
       </p>
     </div>
 
+    <!-- ── HOW IT WORKS ────────────────────────────────────── -->
     <div class="info-card">
+      <div class="accent-divider"></div>
       <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-cogs"></i> How the System Works</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-5 bg-[rgba(255,255,255,0.02)] border border-stroke rounded-xl relative overflow-hidden group hover:border-accent hover:shadow-[0_0_15px_rgba(170,255,46,0.15)] transition-all duration-300">
-          <div class="text-accent text-4xl font-black mb-2 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 origin-left">01</div>
+        <div class="step-card">
+          <div class="step-num">01</div>
           <h4 class="text-white font-semibold mb-2">Data Entry & Validation</h4>
-          <p class="text-sm text-secondary">Users input movie details via a form. JavaScript listens to events and strictly validates inputs in real-time before accepting the data.</p>
+          <p class="text-sm text-secondary leading-relaxed">Users fill out a structured form with movie details. JavaScript listens to real-time input events and enforces strict validation rules — flagging duplicates, checking required fields, and rejecting out-of-range values before any data is accepted.</p>
         </div>
-        <div class="p-5 bg-[rgba(255,255,255,0.02)] border border-stroke rounded-xl relative overflow-hidden group hover:border-accent hover:shadow-[0_0_15px_rgba(170,255,46,0.15)] transition-all duration-300">
-          <div class="text-accent text-4xl font-black mb-2 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 origin-left">02</div>
-          <h4 class="text-white font-semibold mb-2">Local Storage API</h4>
-          <p class="text-sm text-secondary">The validated data is serialized into JSON format and saved securely in the browser's localStorage, acting as our client-side database.</p>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4 class="text-white font-semibold mb-2">localStorage Persistence</h4>
+          <p class="text-sm text-secondary leading-relaxed">Validated entries are serialized into JSON and stored in the browser's localStorage, acting as a lightweight client-side database. Data survives page refreshes, making CineLog fully functional without any server or internet connection.</p>
         </div>
-        <div class="p-5 bg-[rgba(255,255,255,0.02)] border border-stroke rounded-xl relative overflow-hidden group hover:border-accent hover:shadow-[0_0_15px_rgba(170,255,46,0.15)] transition-all duration-300">
-          <div class="text-accent text-4xl font-black mb-2 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 origin-left">03</div>
-          <h4 class="text-white font-semibold mb-2">Dynamic Rendering</h4>
-          <p class="text-sm text-secondary">The system reads the stored data and dynamically constructs HTML tables, stats, and recommendations via DOM manipulation.</p>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4 class="text-white font-semibold mb-2">Dynamic Rendering & Insights</h4>
+          <p class="text-sm text-secondary leading-relaxed">Stored data is read and transformed into dynamic HTML tables, interactive Chart.js visualizations, and a genre-aware recommendations engine — all via DOM manipulation, keeping the UI always in sync with the latest watchlist state.</p>
         </div>
       </div>
     </div>
 
+    <!-- ── SYSTEM FEATURES ────────────────────────────────── -->
     <div class="info-card">
+      <div class="accent-divider"></div>
       <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-microchip"></i> System Features</h3>
-      <ul class="feature-list">
-        <li><i class="fas fa-plus-circle"></i> Add movies with complete metadata</li>
-        <li><i class="fas fa-star"></i> Interactive 5-star rating system</li>
-        <li><i class="fas fa-eye"></i> Multiple Watch Status tracking</li>
-        <li><i class="fas fa-check-double"></i> Real-time form validation & alerts</li>
-        <li><i class="fas fa-table"></i> Dynamic DOM table rendering</li>
-        <li><i class="fas fa-ban"></i> Duplicate entry detection</li>
-        <li><i class="fas fa-search"></i> Live multi-keyword search</li>
-        <li><i class="fas fa-filter"></i> Category filtering by status</li>
-        <li><i class="fas fa-chart-pie"></i> Interactive Chart.js analytics</li>
-        <li><i class="fas fa-film"></i> Algorithmic recommendations</li>
-        <li><i class="fas fa-bell"></i> Animated toast notifications</li>
-        <li><i class="fas fa-database"></i> Persistent localStorage data</li>
-      </ul>
-    </div>
-
-    <div class="info-card">
-      <h3 class="text-xl font-bold text-white mb-3">🛠 Technologies Used</h3>
-      <p class="text-secondary mb-4">
-        Built entirely with vanilla web technologies — no complex backend frameworks required.
-      </p>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        <span class="tech-badge"><i class="fab fa-html5"></i> HTML5</span>
-        <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
-        <span class="tech-badge"><i class="fab fa-js"></i> JavaScript ES6+</span>
-        <span class="tech-badge"><i class="fas fa-database"></i> localStorage API</span>
-        <span class="tech-badge"><i class="fas fa-chart-bar"></i> Chart.js</span>
-        <span class="tech-badge"><i class="fas fa-wind"></i> TailwindCSS</span>
-        <span class="tech-badge"><i class="fas fa-cloud-upload-alt"></i> Netlify</span>
-        <span class="tech-badge"><i class="fas fa-code"></i> VS Code</span>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <i class="fas fa-plus-circle"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Add Movies</span>
+            <span class="feature-item-desc">Input complete metadata: title, director, genre, year, runtime, and status.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-star"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">5-Star Rating System</span>
+            <span class="feature-item-desc">Interactive star selector to rate any watched film from 1 to 5 stars.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-eye"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Watch Status Tracking</span>
+            <span class="feature-item-desc">Track each film as Watched, Currently Watching, or Plan to Watch.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-double"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Real-time Validation</span>
+            <span class="feature-item-desc">Instant feedback on every field with animated toast alerts for errors.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-table"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Dynamic DOM Table</span>
+            <span class="feature-item-desc">Watchlist renders entirely via JavaScript DOM injection — no page reload needed.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-ban"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Duplicate Detection</span>
+            <span class="feature-item-desc">Prevents adding the same movie title more than once to keep the list clean.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-search"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Live Multi-keyword Search</span>
+            <span class="feature-item-desc">Search across title, director, and genre simultaneously as you type.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-filter"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Category Filtering</span>
+            <span class="feature-item-desc">Quickly filter the full list by watch status with a single click.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-chart-pie"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Chart.js Analytics</span>
+            <span class="feature-item-desc">Doughnut, bar, and line charts visualise genre, rating, and year data.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-film"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Smart Recommendations</span>
+            <span class="feature-item-desc">Algorithm surfaces the best Plan to Watch titles based on your rated genres.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-bell"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Toast Notifications</span>
+            <span class="feature-item-desc">Animated slide-in toasts confirm every action — add, delete, or update.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-database"></i>
+          <div class="feature-item-text">
+            <span class="feature-item-title">Persistent Storage</span>
+            <span class="feature-item-desc">All data lives in localStorage — no login, no server, no data loss.</span>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- ── TECHNOLOGIES ───────────────────────────────────── -->
+    <div class="info-card">
+      <div class="accent-divider"></div>
+      <h3 class="text-xl font-bold text-white mb-2">🛠 Technologies Used</h3>
+      <p class="text-secondary text-sm mb-5">
+        Built entirely on vanilla web technologies — no backend framework, no bundler, no compile step.
+      </p>
+      <div class="flex flex-wrap gap-2.5">
+        <span class="tech-badge-v2 badge-html"><i class="fab fa-html5"></i> HTML5</span>
+        <span class="tech-badge-v2 badge-css"><i class="fab fa-css3-alt"></i> CSS3</span>
+        <span class="tech-badge-v2 badge-js"><i class="fab fa-js"></i> JavaScript ES6+</span>
+        <span class="tech-badge-v2 badge-local"><i class="fas fa-database"></i> localStorage API</span>
+        <span class="tech-badge-v2 badge-chart"><i class="fas fa-chart-bar"></i> Chart.js v4</span>
+        <span class="tech-badge-v2 badge-tail"><i class="fas fa-wind"></i> TailwindCSS</span>
+        <span class="tech-badge-v2 badge-omdb"><i class="fas fa-image"></i> OMDB API</span>
+        <span class="tech-badge-v2 badge-net"><i class="fas fa-cloud-upload-alt"></i> GitHub Pages</span>
+        <span class="tech-badge-v2 badge-git"><i class="fab fa-github"></i> GitHub</span>
+        <span class="tech-badge-v2 badge-vsc"><i class="fas fa-code"></i> VS Code</span>
+      </div>
+    </div>
+
+    <!-- ── COURSE INFO + FUTURE ENHANCEMENTS ─────────────── -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
       <div class="info-card">
+        <div class="accent-divider"></div>
         <h3 class="text-xl font-bold text-white mb-4">📚 Course Information</h3>
-        <div class="meta-row flex flex-col gap-2">
-          <div class="meta-box"><div class="meta-lbl">Course</div><div class="meta-val">ITEL 203 – Web Systems</div></div>
-          <div class="meta-box"><div class="meta-lbl">Task</div><div class="meta-val">Group Performance Task #1</div></div>
-          <div class="meta-box"><div class="meta-lbl">Topic</div><div class="meta-val">Movie Watchlist Manager</div></div>
-          <div class="meta-box"><div class="meta-lbl">Level</div><div class="meta-val">2nd Year IT Students</div></div>
-          <div class="meta-box"><div class="meta-lbl">Deployment</div><div class="meta-val">Netlify</div></div>
-          <div class="meta-box"><div class="meta-lbl">Group Size</div><div class="meta-val">3 Students</div></div>
+        <div class="flex flex-col gap-2.5">
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Course</div><div class="meta-val-v2">ITEL 203 – Web Systems &amp; Technologies</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Task</div><div class="meta-val-v2">Group Performance Task #1</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Topic</div><div class="meta-val-v2">Movie Watchlist Manager</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Level</div><div class="meta-val-v2">2nd Year Information Technology</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Deployment Platform</div><div class="meta-val-v2">GitHub Pages (Static Hosting)</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Group Size</div><div class="meta-val-v2">3 Students</div></div>
+          <div class="meta-box-v2"><div class="meta-lbl-v2">Pages Built</div><div class="meta-val-v2">5 — Home, Statistics, Picks, About, Developers</div></div>
         </div>
       </div>
 
       <div class="info-card">
-        <h3 class="text-xl font-bold text-white mb-4">🚀 Future Enhancements</h3>
-        <p class="text-secondary text-sm mb-4">Features planned for future iterations of CineLog:</p>
-        <ul class="flex flex-col gap-3 text-secondary text-sm">
-          <li class="flex items-center gap-3">
-            <i class="fas fa-cloud text-stroke"></i> Cloud Database Integration (Firebase/Supabase)
-          </li>
-          <li class="flex items-center gap-3">
-            <i class="fas fa-users text-stroke"></i> User Authentication & Login System
-          </li>
-          <li class="flex items-center gap-3">
-            <i class="fas fa-globe text-stroke"></i> TMDB API Fetching for auto-filling movie details
-          </li>
-          <li class="flex items-center gap-3">
-            <i class="fas fa-share-alt text-stroke"></i> Social sharing of user watchlists
-          </li>
-          <li class="flex items-center gap-3">
-            <i class="fas fa-moon text-stroke"></i> Light/Dark mode toggle
-          </li>
-        </ul>
+        <div class="accent-divider"></div>
+        <h3 class="text-xl font-bold text-white mb-2">🚀 Future Enhancements</h3>
+        <p class="text-secondary text-sm mb-4">Planned features for the next iteration of CineLog:</p>
+        <div class="flex flex-col gap-2.5">
+          <div class="future-item">
+            <i class="fas fa-cloud"></i>
+            <span>Cloud database integration via <strong class="text-white">Firebase</strong> or <strong class="text-white">Supabase</strong></span>
+          </div>
+          <div class="future-item">
+            <i class="fas fa-user-lock"></i>
+            <span>User authentication with login &amp; personal watchlist sync</span>
+          </div>
+          <div class="future-item">
+            <i class="fas fa-globe"></i>
+            <span><strong class="text-white">TMDB API</strong> integration for auto-filling movie details &amp; posters</span>
+          </div>
+          <div class="future-item">
+            <i class="fas fa-share-alt"></i>
+            <span>Social sharing — export &amp; share watchlists publicly</span>
+          </div>
+          <div class="future-item">
+            <i class="fas fa-moon"></i>
+            <span>Light / Dark mode toggle with system preference detection</span>
+          </div>
+          <div class="future-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Progressive Web App (PWA) support for offline mobile use</span>
+          </div>
+        </div>
       </div>
+
     </div>
 
   </div>
