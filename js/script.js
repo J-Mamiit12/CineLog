@@ -133,6 +133,39 @@ async function omdbSearch() {
   setOmdbLoading(false);
 }
 
+/* ══════════════════════════════════════════════════════════════
+   OMDB — RESPONSIVE LIVE SEARCH (DEBOUNCED)
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1. The Debounce Function: Delays the search until the user stops typing */
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+/* 2. The Logic: What happens as the user types */
+const handleLiveSearch = debounce(() => {
+  const query = $('omdbSearchInput').value.trim();
+  
+  // If the user clears the search box, hide the dropdown and messages
+  if (!query) {
+    $('omdbResults').style.display = 'none';
+    setOmdbMsg(''); 
+    return;
+  }
+
+  // Otherwise, trigger the existing search function!
+  omdbSearch();
+}, 500); /* Wait 500ms after the last keystroke */
+
+/* 3. Attach the event listener to the input field */
+$('omdbSearchInput').addEventListener('input', handleLiveSearch);
+
 
 /* ══════════════════════════════════════════════════════════════
    OMDB — RENDER RESULTS DROPDOWN
