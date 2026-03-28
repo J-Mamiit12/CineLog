@@ -42,7 +42,7 @@
   <!-- ══════════════════════════════════════════════════════
        HERO — Headline and tagline
        ══════════════════════════════════════════════════════ -->
-  <section class="hero relative pt-40 pb-40 text-center overflow-hidden px-8">
+  <section class="hero relative pt-28 pb-8 text-center overflow-hidden px-8">
     <div class="max-w-3xl mx-auto flex flex-col items-center">
       <div class="hero-eyebrow mb-10">🎞 Your Personal Cinema</div>
       <h1 class="hero-title mb-6">Track Every <span class="accent">Frame</span></h1>
@@ -55,7 +55,7 @@
   <!-- ══════════════════════════════════════════════════════
        STATS BAR — Live counters for watchlist totals
        ══════════════════════════════════════════════════════ -->
-  <div class="glas-panel flex justify-center gap-12 flex-wrap py-6 px-8 border-y border-stroke bg-surface mb-10">
+  <div class="glas-panel flex justify-center gap-12 flex-wrap py-6 px-8 border-y border-stroke bg-surface mb-6">
     <div class="text-center"><span class="stat-number" id="stat-total">0</span><span class="stat-label">Total</span></div>
     <div class="text-center"><span class="stat-number" id="stat-watched">0</span><span class="stat-label">Watched</span></div>
     <div class="text-center"><span class="stat-number" id="stat-watching">0</span><span class="stat-label">Watching</span></div>
@@ -67,10 +67,10 @@
        MAIN CONTENT — Two-column layout: form | table
        ══════════════════════════════════════════════════════ -->
   <main class="max-w-[1140px] mx-auto px-8 pb-16">
-    <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] gap-7 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] gap-7" style="align-items: start;">
 
       <!-- ── ADD MOVIE CARD ──────────────────────────────── -->
-      <div class="card">
+      <div class="card" style="position: sticky; top: 90px; align-self: start;">
         <div class="card-header">
           <span class="card-header-icon">▸</span>
           <div><h2>Add a Movie</h2><p>Search or fill in manually</p></div>
@@ -227,7 +227,7 @@
       </div><!-- /card -->
 
       <!-- ── WATCHLIST TABLE PANEL ──────────────────────── -->
-      <div class="table-panel">
+      <div class="table-panel" style="align-self: start;">
         <div class="table-panel-header">
           <div><h2>My Watchlist</h2><p>Click any row to view details</p></div>
           <div class="search-wrap">
